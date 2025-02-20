@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon backend/server.js",
     "start": "nodemon",
-    "build": "react-scripts build"
+    "build": "npm install"
   },
   "keywords": [],
   "author": "",

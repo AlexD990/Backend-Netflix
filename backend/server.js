@@ -33,6 +33,17 @@ if (ENV_VARS.NODE_ENV === "production") {
 	});
 }
 
+// Test route to check MongoDB connection
+app.get("/api/v1/test-db", async (req, res) => {
+    try {
+        const result = await mongoose.connection.db.collection(sample_mflix.comments
+		).findOne({});
+        res.status(200).json({ success: true, data: result });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Error connecting to MongoDB", error: error.message });
+    }
+});
+
 app.listen(PORT, () => {
 	console.log("Server started at http://localhost:" + PORT);
 	connectDB();

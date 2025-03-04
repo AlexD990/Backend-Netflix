@@ -5,7 +5,7 @@ import {
 	getMovieTrailers,
 	getSimilarMovies,
 	getTrendingMovie,
-	getNowPlayingMovies,
+	getRecommendationMovies
 } from "../controllers/movie.controller.js";
 
 const router = express.Router();

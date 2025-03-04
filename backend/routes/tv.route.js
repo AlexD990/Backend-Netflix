@@ -6,8 +6,7 @@ import {
 	getTvsByCategory,
 	getTvTrailers,
 	getRecommendationTvs,
-	getTvKeywords,
-	
+	getTvKeywords
 } from "../controllers/tv.controller.js";
 
 const router = express.Router();

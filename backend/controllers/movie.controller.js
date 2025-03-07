@@ -9,6 +9,15 @@ export async function getTrendingMovie(req, res) {
 		res.status(500).json({ success: false, message: "Internal Server Error" });
 	}
 }
+export async function getPopularMovie(req, res) {
+	try {
+		const data = await fetchFromTMDB("https://api.themoviedb.org/3/movie/popular?language=en-US&page=1");
+
+		res.json({ success: true, content: data.results });
+	} catch (error) {
+		res.status(500).json({ success: false, message: "Internal Server Error" });
+	}
+}
 
 export async function getMovieTrailers(req, res) {
 	const { id } = req.params;

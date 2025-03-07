@@ -11,7 +11,7 @@ export async function getTrendingMovie(req, res) {
 }
 export async function getPopularMovie(req, res) {
 	try {
-		const data = await fetchFromTMDB("https://api.themoviedb.org/3/movie/popular?language=en-US&page=1");
+		const data = await fetchFromTMDB("https://api.themoviedb.org/3/movie/popular?language=en-US&page=2");
 
 		res.json({ success: true, content: data.results });
 	} catch (error) {

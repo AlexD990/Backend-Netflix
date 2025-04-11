@@ -18,6 +18,10 @@ const userSchema = mongoose.Schema({
 		type: Array,
 		default: [],
 	},
+	savedMovies: {
+		type: [String], // Array of movie IDs as strings
+		default: [],
+	},
 });
 
 export const User = mongoose.model("User", userSchema);

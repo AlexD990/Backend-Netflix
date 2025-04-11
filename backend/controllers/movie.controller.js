@@ -77,3 +77,33 @@ export async function getMoviesByCategory(req, res) {
 		res.status(500).json({ success: false, message: "Internal Server Error" });
 	}
 }
+
+export async function saveMovie(req, res) {
+	const { movieId } = req.body;
+
+	try {
+		if (!movieId) {
+			return res.status(400).json({ success: false, message: "Movie ID is required" });
+		}
+
+		await User.findByIdAndUpdate(req.user._id, {
+			$addToSet: { savedMovies: movieId }, // Avoid duplicates
+		});
+
+		res.status(200).json({ success: true, message: "Movie saved successfully" });
+	} catch (error) {
+		console.log("Error in saveMovie controller:", error.message);
+		res.status(500).json({ success: false, message: "Internal Server Error" });
+	}
+}
+
+export async function getSavedMovies(req, res) {
+	try {
+		const user = await User.findById(req.user._id).select("savedMovies");
+
+		res.status(200).json({ success: true, savedMovies: user.savedMovies });
+	} catch (error) {
+		console.log("Error in getSavedMovies controller:", error.message);
+		res.status(500).json({ success: false, message: "Internal Server Error" });
+	}
+}

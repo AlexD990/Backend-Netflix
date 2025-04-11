@@ -127,19 +127,16 @@ export async function getSavedMovies(req, res) {
 }
 
 export async function saveMovie(req, res) {
-	const { id } = req.params; // get movie id from params
+	const { id } = req.params; // get id from params
 
 	try {
 		if (!id) {
 			return res.status(400).json({ success: false, message: "Movie ID is required" });
 		}
 
+
 		await User.findByIdAndUpdate(req.user._id, {
-			$push: { 
-				savedMovies: {
-					id: response.results[0].id,
-				}, 
-			}, // Do not add duplicate movie IDs
+			$addToSet: { savedMovies: id }, // use $addToSet to avoid duplicates
 		});
 
 		res.status(200).json({ success: true, message: "Movie saved successfully" });

@@ -97,13 +97,14 @@ export async function saveMovie(req, res) {
 	}
 }
 
+// This function retrieves the saved movies for the authenticated user
+// It uses the protectRoute middleware to ensure the user is authenticated
+// The saved movies are returned in the response
+
 export async function getSavedMovies(req, res) {
 	try {
-		const user = await User.findById(req.user._id).select("savedMovies");
-
-		res.status(200).json({ success: true, savedMovies: user.savedMovies });
+		res.status(200).json({ success: true, content: req.user.savedMovies });
 	} catch (error) {
-		console.log("Error in getSavedMovies controller:", error.message);
 		res.status(500).json({ success: false, message: "Internal Server Error" });
 	}
 }

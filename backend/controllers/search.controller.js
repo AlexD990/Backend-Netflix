@@ -120,7 +120,7 @@ export async function removeItemFromSearchHistory(req, res) {
 
 export async function getSavedMovies(req, res) {
 	try {
-		res.status(200).json({ success: true, content: req.user.savedMovies });
+		res.status(200).json({ success: true, id: req.user.savedMovies });
 	} catch (error) {
 		res.status(500).json({ success: false, message: "Internal Server Error" });
 	}
@@ -136,7 +136,7 @@ export async function saveMovie(req, res) {
 
 
 		await User.findByIdAndUpdate(req.user._id, {
-			$addToSet: { savedMovies: id }, // use $addToSet to avoid duplicates
+			$addToSet: { savedMovies: {id: id} }, // use $addToSet to avoid duplicates
 		});
 
 		res.status(200).json({ success: true, message: "Movie saved successfully" });

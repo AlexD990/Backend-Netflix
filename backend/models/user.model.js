@@ -20,8 +20,8 @@ const userSchema = mongoose.Schema({
 	},
 
 	id: {
-		type: String,
-		requered: true,
+		type: Number,
+		required: true,
 		unique: true,
 	},
 

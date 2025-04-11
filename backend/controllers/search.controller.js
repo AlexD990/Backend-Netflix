@@ -130,12 +130,12 @@ export async function saveMovie(req, res) {
 	const { id, title, posterPath } = req.body; // Получаем данные из тела запроса
 
 	try {
-		// Проверяем, что все необходимые параметры переданы
-		if (!id || !title || !posterPath) {
+		// Check if all required fields are present
+		if (!id || !title || posterPath) {
 			return res.status(400).json({ success: false, message: "id, title, and posterPath are required" });
 		}
 
-		// Проверяем, существует ли уже фильм с таким ID
+		// Check if the movie is already saved
 		const user = await User.findById(req.user._id);
 		const isMovieAlreadySaved = user.savedMovies.some((movie) => movie.id === id);
 
@@ -143,7 +143,7 @@ export async function saveMovie(req, res) {
 			return res.status(400).json({ success: false, message: "Movie is already saved" });
 		}
 
-		// Добавляем фильм в savedMovies
+		// Add the movie to the savedMovies array
 		user.savedMovies.push({ id, title, posterPath });
 		await user.save();
 

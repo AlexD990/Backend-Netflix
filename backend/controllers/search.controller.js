@@ -120,7 +120,7 @@ export async function removeItemFromSearchHistory(req, res) {
 
 export async function getSavedMovies(req, res) {
 	try {
-		res.status(200).json({ success: true, id: req.user.savedMovies });
+		res.status(200).json({ success: true, content: req.user.savedMovies });
 	} catch (error) {
 		res.status(500).json({ success: false, message: "Internal Server Error" });
 	}

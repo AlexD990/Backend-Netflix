@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
 		default: [],
 	},
 	savedMovies: {
-		type: [String], // Array of movie IDs as strings
+		type: String, // Array of movie IDs
 		default: [],
 	},
 });

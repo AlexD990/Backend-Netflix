@@ -127,19 +127,27 @@ export async function getSavedMovies(req, res) {
 }
 
 export async function saveMovie(req, res) {
-	const { id } = req.params; // get id from params
+	const { id, title, posterPath } = req.body; // Получаем данные из тела запроса
 
 	try {
-		if (!id) {
-			return res.status(400).json({ success: false, message: "Movie ID is required" });
+		// Проверяем, что все необходимые параметры переданы
+		if (!id || !title || !posterPath) {
+			return res.status(400).json({ success: false, message: "id, title, and posterPath are required" });
 		}
 
+		// Проверяем, существует ли уже фильм с таким ID
+		const user = await User.findById(req.user._id);
+		const isMovieAlreadySaved = user.savedMovies.some((movie) => movie.id === id);
 
-		await User.findByIdAndUpdate(req.user._id, {
-			$addToSet: { savedMovies: {id: id} }, // use $addToSet to avoid duplicates
-		});
+		if (isMovieAlreadySaved) {
+			return res.status(400).json({ success: false, message: "Movie is already saved" });
+		}
 
-		res.status(200).json({ success: true, message: "Movie saved successfully" });
+		// Добавляем фильм в savedMovies
+		user.savedMovies.push({ id, title, posterPath });
+		await user.save();
+
+		res.status(200).json({ success: true, message: "Movie saved successfully", savedMovies: user.savedMovies });
 	} catch (error) {
 		console.log("Error in saveMovie controller:", error.message);
 		res.status(500).json({ success: false, message: "Internal Server Error" });

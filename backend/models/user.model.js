@@ -18,6 +18,22 @@ const userSchema = mongoose.Schema({
 		type: Array,
 		default: [],
 	},
+
+	id: {
+		type: String,
+		requered: true,
+		unique: true,
+	},
+
+	title: {
+		type: String,
+		requered: true,
+
+	},
+
+	posterPath: {
+		type: String,
+	},
 	savedMovies: {
 		type: Array,
 		default: [],

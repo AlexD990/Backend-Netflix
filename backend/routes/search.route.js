@@ -20,6 +20,6 @@ router.get("/history", getSearchHistory);
 router.delete("/history/:id", removeItemFromSearchHistory);
 
 router.get("/saved", getSavedMovies);
-router.post("/:id/save", saveMovie);
+router.post("/save", saveMovie);
 
 export default router;

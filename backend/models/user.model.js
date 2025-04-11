@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema({
 	},
 
 	id: {
-		type: String,
+		type: Number,
 	},
 
 	title: {

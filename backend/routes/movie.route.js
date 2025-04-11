@@ -7,7 +7,6 @@ import {
 	getTrendingMovie,
 	getRecommendationMovies,
 	getPopularMovie,
-	saveMovie,
 } from "../controllers/movie.controller.js";
 
 const router = express.Router();
@@ -19,6 +18,5 @@ router.get("/:id/details", getMovieDetails);
 router.get("/:id/similar", getSimilarMovies);
 router.get("/:id/recommendations", getRecommendationMovies);
 router.get("/:category", getMoviesByCategory);
-router.post("/:id/save", saveMovie);
 
 export default router;

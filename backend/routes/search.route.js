@@ -5,7 +5,8 @@ import {
 	searchMovie,
 	searchPerson,
 	searchTv,
-	getSavedMovies
+	getSavedMovies,
+	saveMovie
 } from "../controllers/search.controller.js";
 
 const router = express.Router();
@@ -19,5 +20,6 @@ router.get("/history", getSearchHistory);
 router.delete("/history/:id", removeItemFromSearchHistory);
 
 router.get("/saved", getSavedMovies);
+router.post("/:id/save", saveMovie);
 
 export default router;

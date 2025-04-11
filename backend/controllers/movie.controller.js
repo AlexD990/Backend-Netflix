@@ -78,23 +78,5 @@ export async function getMoviesByCategory(req, res) {
 	}
 }
 
-export async function saveMovie(req, res) {
-	const { id } = req.params; // get movie id from params
-
-	try {
-		if (!id) {
-			return res.status(400).json({ success: false, message: "Movie ID is required" });
-		}
-
-		await User.findByIdAndUpdate(req.user._id, {
-			$addToSet: { savedMovies: id }, // Do not add duplicate movie IDs
-		});
-
-		res.status(200).json({ success: true, message: "Movie saved successfully" });
-	} catch (error) {
-		console.log("Error in saveMovie controller:", error.message);
-		res.status(500).json({ success: false, message: "Internal Server Error" });
-	}
-}
 
 

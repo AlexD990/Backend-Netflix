@@ -20,7 +20,7 @@ router.get("/:id/details", getMovieDetails);
 router.get("/:id/similar", getSimilarMovies);
 router.get("/:id/recommendations", getRecommendationMovies);
 router.get("/:category", getMoviesByCategory);
-router.post("/save", saveMovie);
+router.post("/:id/save", saveMovie);
 router.get("/saved", getSavedMovies);
 
 export default router;

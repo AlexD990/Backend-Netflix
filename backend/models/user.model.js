@@ -21,13 +21,10 @@ const userSchema = mongoose.Schema({
 
 	id: {
 		type: String,
-		required: true,
-		unique: true,
 	},
 
 	title: {
 		type: String,
-		requered: true,
 
 	},
 

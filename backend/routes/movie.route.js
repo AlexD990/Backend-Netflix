@@ -8,7 +8,6 @@ import {
 	getRecommendationMovies,
 	getPopularMovie,
 	saveMovie,
-	getSavedMovies
 } from "../controllers/movie.controller.js";
 
 const router = express.Router();
@@ -21,6 +20,5 @@ router.get("/:id/similar", getSimilarMovies);
 router.get("/:id/recommendations", getRecommendationMovies);
 router.get("/:category", getMoviesByCategory);
 router.post("/:id/save", saveMovie);
-router.get("/saved", getSavedMovies);
 
 export default router;

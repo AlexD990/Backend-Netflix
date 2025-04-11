@@ -131,8 +131,8 @@ export async function saveMovie(req, res) {
 
 	try {
 		// Check if all required fields are present
-		if (!id || !title || posterPath) {
-			return res.status(400).json({ success: false, message: "id, title, and posterPath are required" });
+		if (!id || !title) {
+			return res.status(400).json({ success: false, message: "id, title are required" });
 		}
 
 		// Check if the movie is already saved

@@ -6,8 +6,10 @@ import {
 	searchPerson,
 	searchTv,
 	getSavedMovies,
-	saveMovie
+	saveMovie,
+	removeSavedMovie
 } from "../controllers/search.controller.js";
+import { protectRoute } from "../middleware/protectRoute.js";
 
 const router = express.Router();
 
@@ -21,5 +23,7 @@ router.delete("/history/:id", removeItemFromSearchHistory);
 
 router.get("/saved", getSavedMovies);
 router.post("/save", saveMovie);
+
+router.delete("/saved-movies/:id", protectRoute, removeSavedMovie);
 
 export default router;

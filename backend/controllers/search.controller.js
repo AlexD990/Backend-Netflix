@@ -127,7 +127,7 @@ export async function getSavedMovies(req, res) {
 }
 
 export async function saveMovie(req, res) {
-	const { id, title, posterPath } = req.body; // Получаем данные из тела запроса
+	const { id, title, posterPath } = req.body; // Get the movie details from the request body
 
 	try {
 		// Check if all required fields are present
@@ -150,6 +150,24 @@ export async function saveMovie(req, res) {
 		res.status(200).json({ success: true, message: "Movie saved successfully", savedMovies: user.savedMovies });
 	} catch (error) {
 		console.log("Error in saveMovie controller:", error.message);
+		res.status(500).json({ success: false, message: "Internal Server Error" });
+	}
+}
+
+export async function removeSavedMovie(req, res) {
+	const { id } = req.params; // Get the movie ID from the request parameters
+
+	try {
+		// Remove the movie from the savedMovies array
+		await User.findByIdAndUpdate(req.user._id, {
+			$pull: {
+				savedMovies: { id: parseInt(id) },
+			},
+		});
+
+		res.status(200).json({ success: true, message: "Movie removed from saved movies" });
+	} catch (error) {
+		console.log("Error in removeSavedMovie controller:", error.message);
 		res.status(500).json({ success: false, message: "Internal Server Error" });
 	}
 }
